@@ -15,6 +15,7 @@ import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [clickedCards, setClickedCards] = useState([]);
   const [streak, setStreak] = useState(0);
   const [cards, setCards] = useState([
     { name: "Ash", id: uniqid(), img: ash, clicked: false },
@@ -69,11 +70,22 @@ function App() {
     },
   ]);
 
+  function handleCount(e) {
+    if (clickedCards.includes(e.target.id)) {
+      count > streak && setStreak(count);
+      setClickedCards([]);
+      setCount(0);
+    } else {
+      setClickedCards([...clickedCards, e.target.id]);
+      setCount(count + 1);
+    }
+  }
+
   return (
     <div className="App">
       <div className="count">Count: {count}</div>
       <div className="streak">Best Streak: {streak}</div>
-      <Card cardInfo={cards} />
+      <Card cardInfo={cards} handleCount={handleCount} />
     </div>
   );
 }
