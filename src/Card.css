@@ -1,0 +1,18 @@
+.card-ul {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: space-evenly;
+}
+
+.card-li {
+  list-style: none;
+}
+
+.card-h1 {
+}
+
+.card-img {
+  width: 250px;
+  height: auto;
+}
