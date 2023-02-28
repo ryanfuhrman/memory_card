@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import uniqid from "uniqid";
 import Card from "./Card";
 import ash from "./imgs/ash.png";
@@ -80,6 +80,27 @@ function App() {
       setCount(count + 1);
     }
   }
+
+  function handleShuffle(array) {
+    const shuffledCards = [...array];
+    let currentIndex = shuffledCards.length;
+    let randomIndex;
+
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [shuffledCards[currentIndex], shuffledCards[randomIndex]] = [
+        shuffledCards[randomIndex],
+        shuffledCards[currentIndex],
+      ];
+    }
+    return shuffledCards;
+  }
+
+  useEffect(() => {
+    setCards(handleShuffle(cards));
+  }, [count]);
 
   return (
     <div className="App">
